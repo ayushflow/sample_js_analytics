@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom actions
+
 import 'package:flutter/foundation.dart';
 
 import 'dart:js' as js;
@@ -38,11 +40,15 @@ Future trackEvent(
         }
       });
     }
+
+    _parameters['analytics_event_name'] = eventName;
+    final _encodedPayload = jsonEncode(_parameters);
+
     // Call the track event function
     if (kIsWeb) {
       js.context.callMethod(
         'trackAnalyticsEvent',
-        [eventName, _parameters],
+        [_encodedPayload],
       );
     }
   } catch (error, stacktrace) {
