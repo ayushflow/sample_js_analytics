@@ -54,12 +54,24 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
-  
-  
-  
-  
-  
   <script>
+    // Call track event using web sdk in this function
+    function trackAnalyticsEvent(payload) {
+      
+      // check if the payload is present
+      if(payload) {
+        const eventData = JSON.parse(payload);
+        const eventName = eventData["analytics_event_name"];
+
+        delete eventData["analytics_event_name"];
+
+        // TODO: Replace with function call
+        console.log(eventName);
+        console.log(eventData);
+      }
+    }
+
+    // Flutter load
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
